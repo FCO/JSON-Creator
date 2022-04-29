@@ -1,0 +1,45 @@
+use Test;
+use JSON::Creator;
+
+my $sub = json { .a = 42 };
+
+my @tests =
+    ({ .a = 1               }, %(:1a          ).Map),
+    ({ .a = 1; .b = .a * 2  }, %(:1a, :2b     ).Map),
+    ({ .a = 1; .a *= 2      }, %(:2a          ).Map),
+    ({ .[0] = 1             }, (1,            )),
+    ({ .[0] = (1 xx 3).Array}, ((1, 1, 1),    )),
+    ({ .b = $sub            }, %(:b({:42a}.Map)).Map),
+;
+
+subtest {
+    plan +@tests;
+    for @tests -> ($expected, $received) {
+        is-deeply json($expected).to-data, $received;
+    }
+}
+
+subtest {
+    my $json = json {
+        .person1 = %(
+            :name<Alice>,
+            :welcome("Hello Alice!"),
+        ),
+        .person2 = %(
+            |.person1,
+            :name<Bob>,
+        )
+    }
+    is-deeply $json.to-data, %(
+        :person1(%(
+            :name<Alice>,
+            :welcome("Hello Alice!"),
+        ).Map),
+        :person2(%(
+            :name<Bob>,
+            :welcome("Hello Bob!"),
+        ).Map)
+    ).Map;
+}
+
+done-testing;
