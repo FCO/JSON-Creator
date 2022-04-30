@@ -75,7 +75,7 @@ JSON::Creator is ...
 
 =head1 AUTHOR
 
- <foliveira@gocardless.com>
+ <fernandocorrea@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

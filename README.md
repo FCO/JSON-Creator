@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/FCO/JSON-Creator/workflows/test/badge.svg)](https://github.com/FCO/JSON-Creator/actions)
+
 NAME
 ====
 
@@ -18,7 +20,7 @@ JSON::Creator is ...
 AUTHOR
 ======
 
-    <foliveira@gocardless.com>
+    <fernandocorrea@gmail.com>
 
 COPYRIGHT AND LICENSE
 =====================
